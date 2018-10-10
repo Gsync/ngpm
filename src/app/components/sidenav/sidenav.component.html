@@ -1,7 +1,7 @@
 <app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav mode="side" class="app-sidenav" opened>
-    <mat-toolbar color="primary">
+  <mat-sidenav #sidenav mode="side" class="app-sidenav" opened>
+    <mat-toolbar>
       <span>Dashboard</span>
     </mat-toolbar>
     <mat-nav-list>
