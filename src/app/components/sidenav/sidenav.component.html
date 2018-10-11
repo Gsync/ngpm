@@ -5,8 +5,8 @@
       <span>Dashboard</span>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item>Projects</a>
-      <a mat-list-item>Resources</a>
+      <a mat-list-item [routerLink]="['/projects']" routerLinkActive="router-link-active">Projects</a>
+      <a mat-list-item [routerLink]="['/resources']" routerLinkActive="router-link-active">Resources</a>
     </mat-nav-list>
   </mat-sidenav>
   <!-- Main Body -->
