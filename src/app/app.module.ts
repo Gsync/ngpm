@@ -1,6 +1,8 @@
 import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,16 +19,33 @@ import { ActivityDetailsComponent } from './components/activity-details/activity
 import { ActivityFormComponent } from './components/activity-form/activity-form.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
 import { ResourceFormComponent } from './components/resource-form/resource-form.component';
+import { InMemoryWebApiService } from './services/in-memory-web-api.service';
+import { DataService } from './services/data.service';
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, SidenavComponent, ProjectsListComponent, ActivitiesListComponent, ResourcesListComponent, ResourceDetailsComponent, ProjectDetailsComponent, ActivityDetailsComponent, ActivityFormComponent, ProjectFormComponent, ResourceFormComponent],
+  declarations: [
+    AppComponent,
+    ToolbarComponent,
+    SidenavComponent,
+    ProjectsListComponent,
+    ActivitiesListComponent,
+    ResourcesListComponent,
+    ResourceDetailsComponent,
+    ProjectDetailsComponent,
+    ActivityDetailsComponent,
+    ActivityFormComponent,
+    ProjectFormComponent,
+    ResourceFormComponent
+  ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApiService), // import after httpclientmodule import
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
