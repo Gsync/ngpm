@@ -1,10 +1,12 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Project } from '../models/project';
+import { Resource } from '../models/resource';
 
 export class InMemoryWebApiService implements InMemoryDbService {
   createDb() {
     const projects: Project[] = data.projects;
-    return { projects };
+    const resources: Resource[] = data.resources;
+    return { projects, resources };
   }
 }
 
