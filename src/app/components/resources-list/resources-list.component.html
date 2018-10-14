@@ -1,4 +1,4 @@
-<ul *ngFor="let resource of resources">
+<ul *ngFor="let resource of resources$ | async">
   <li>
     {{resource.firstName}}
   </li>

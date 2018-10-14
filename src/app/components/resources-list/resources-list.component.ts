@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Resource } from 'src/app/models/resource';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-resources-list',
@@ -8,13 +9,10 @@ import { Resource } from 'src/app/models/resource';
   styleUrls: ['./resources-list.component.scss']
 })
 export class ResourcesListComponent implements OnInit {
-  private resources: Resource[];
+  private resources$: Observable<Resource[]>;
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getResources().subscribe(data => {
-      this.resources = data;
-      console.log(this.resources);
-    });
+    this.resources$ = this.dataService.getResources();
   }
 }

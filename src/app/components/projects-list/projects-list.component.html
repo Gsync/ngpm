@@ -1,4 +1,4 @@
-<ul *ngFor="let project of projects">
+<ul *ngFor="let project of projects$ | async">
   <li>
     {{project.title}}
   </li>
