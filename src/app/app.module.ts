@@ -7,6 +7,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 // Store
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { ProjectFormComponent } from './components/project-form/project-form.com
 import { ResourceFormComponent } from './components/resource-form/resource-form.component';
 import { InMemoryWebApiService } from './services/in-memory-web-api.service';
 import { DataService } from './services/data.service';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,12 @@ import { DataService } from './services/data.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot({ store: reducer })
+    StoreModule.forRoot({ store: reducer }),
+    StoreDevtoolsModule.instrument({
+      name: 'ngpm app devtools',
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
