@@ -5,6 +5,16 @@ export function reducer(state = {}, action) {
         ...state,
         showSidenav: action.payload
       };
+    case 'LOAD_PROJECTS':
+      return {
+        ...state,
+        projects: action.payload
+      };
+    case 'LOAD_RESOURCES':
+      return {
+        ...state,
+        resources: action.payload
+      };
     default:
       return state;
   }
