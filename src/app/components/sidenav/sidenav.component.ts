@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { State } from 'src/app/store/reducer';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,16 +12,12 @@ export class SidenavComponent implements OnInit {
   showSidenav: boolean;
   @ViewChild('sidenav')
   sidenav: MatSidenav;
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    this.store.subscribe(store => {
-      if (store.store.showSidenav === undefined) {
-        this.showSidenav = true;
-      } else {
-        this.showSidenav = store.store.showSidenav;
-      }
-      console.log(store.store);
+    this.store.select('appState').subscribe(store => {
+      this.showSidenav = store.showSidenav;
+      console.log(store);
     });
   }
 

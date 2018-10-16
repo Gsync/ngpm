@@ -6,7 +6,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 // Store
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/reducer';
+import { reducer, initialState } from './store/reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +50,7 @@ import { environment } from 'src/environments/environment.prod';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot({ store: reducer }),
+    StoreModule.forRoot({ appState: reducer }),
     StoreDevtoolsModule.instrument({
       name: 'ngpm app devtools',
       maxAge: 25,
