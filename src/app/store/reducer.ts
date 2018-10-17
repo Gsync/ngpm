@@ -13,7 +13,7 @@ export const initialState: State = {
   resources: []
 };
 
-export function reducer(state: State = initialState, action): State {
+export function reducer(state = initialState, action): State {
   switch (action.type) {
     case 'TOGGLE_SIDENAV':
       return {

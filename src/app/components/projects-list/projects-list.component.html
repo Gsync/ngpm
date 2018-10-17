@@ -1,5 +1,13 @@
-<ul *ngFor="let project of projects$ | async">
-  <li>
-    {{project.title}}
-  </li>
-</ul>
+<h1>Projects List</h1>
+<div class='mat-padding' fxLayout="row" layout-wrap>
+  <mat-card flex-sm="25" flex-gt-sm="30" flex="100" *ngFor="let project of projects$ | async">
+    <mat-card-title>
+      <span class="mat-headline">{{project.title}}</span>
+    </mat-card-title>
+    <mat-card-content>
+      <p>
+        The description...
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
