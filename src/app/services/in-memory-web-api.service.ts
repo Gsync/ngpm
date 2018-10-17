@@ -1,6 +1,6 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Project } from '../models/project';
-import { Resource } from '../models/resource';
+import { InMemoryDbService } from "angular-in-memory-web-api";
+import { Project } from "../models/project";
+import { Resource } from "../models/resource";
 
 export class InMemoryWebApiService implements InMemoryDbService {
   createDb() {
@@ -14,32 +14,32 @@ const data = {
   projects: [
     {
       id: 1,
-      title: 'Project Management App',
-      dateCreated: '2018-04-24T19:16:37Z',
-      personCreated: 'khuram',
+      title: "Project Management App",
+      dateCreated: "2018-04-24T19:16:37Z",
+      personCreated: "khuram",
       priority: 1,
       status: 2,
       activities: [
         {
           id: 1,
-          title: 'Plan App',
-          description: 'Gather requirements and plan',
-          dateCreated: '2018-04-24T19:16:37Z',
+          title: "Plan App",
+          description: "Gather requirements and plan",
+          dateCreated: "2018-04-24T19:16:37Z",
           resourceId: 1,
           hoursWorked: 0
         },
         {
           id: 2,
-          title: 'Design App',
-          description: 'Design the prototype',
-          dateCreated: '2018-04-24T19:16:37Z',
+          title: "Design App",
+          description: "Design the prototype",
+          dateCreated: "2018-04-24T19:16:37Z",
           resourceId: 1,
           hoursWorked: 0
         },
         {
           id: 3,
-          title: 'Build App',
-          description: 'Application development',
+          title: "Build App",
+          description: "Application development",
           dateCreated: '2018-04-24T19:16:37Z',
           resourceId: 1,
           hoursWorked: 0
@@ -135,9 +135,18 @@ const data = {
       activityId: 2
     },
     {
-      id: 1,
+      id: 5,
       firstName: 'Khuram',
       lastName: 'Niaz',
+      email: 'test@xyz.com',
+      phone: 1234567890,
+      designation: 'Product Manager',
+      activityId: 1
+    },
+    {
+      id: 6,
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'test@xyz.com',
       phone: 1234567890,
       designation: 'Product Manager',
