@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./projects-list.component.scss']
 })
 export class ProjectsListComponent implements OnInit {
-  private projects$: Observable<Project[]>;
+  projects$: Observable<Project[]>;
   constructor(private dataService: DataService, private store: Store<any>) {}
 
   ngOnInit() {

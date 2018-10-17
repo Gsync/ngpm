@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -48,6 +49,7 @@ import { environment } from 'src/environments/environment.prod';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApiService), // import after httpclientmodule import
     AppRoutingModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     MaterialModule,
     StoreModule.forRoot({ appState: reducer }),
