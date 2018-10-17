@@ -1,6 +1,7 @@
 <h1>Projects</h1>
 <hr>
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" layout-wrap>
+  <mat-spinner class="margin-auto" *ngIf="!loaded"></mat-spinner>
   <mat-card fxFlex="30%" *ngFor="let project of projects$ | async">
     <mat-card-title>{{project.title}}</mat-card-title>
     <mat-card-subtitle>Created: {{project.dateCreated}}</mat-card-subtitle>
