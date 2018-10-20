@@ -1,3 +1,29 @@
-<p>
-  {{currentProject$ | async | json}}
-</p>
+<div *ngIf="currentProject$ | async as project">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>{{project.title}}</h2>
+      </mat-card-title>
+      <mat-card-subtitle>Created on: {{ project.dateCreated | date:'d LLLL'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Details">
+          <p></p>
+          <mat-list role="list">
+            <mat-list-item role="listitem">Created by: {{project.personCreated}}</mat-list-item>
+            <mat-list-item role="listitem">Priority: {{project.priority}}</mat-list-item>
+            <mat-list-item role="listitem">Status: {{project.status}}</mat-list-item>
+            <mat-list-item role="listitem">Number of Activities: {{project.activities.length}}</mat-list-item>
+          </mat-list>
+        </mat-tab>
+        <mat-tab label="Activities">
+          <!-- TODO: turn this to a table -->
+          <mat-list role="list" *ngFor="let activity of project.activities">
+            <mat-list-item role="listitem">{{activity.title}}</mat-list-item>
+          </mat-list>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
