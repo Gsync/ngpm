@@ -13,6 +13,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 export class ResourcesListComponent implements OnInit {
   resources$: Observable<Resource[]>;
   displayedColumns: string[] = [
+    'position',
     'name',
     'designation',
     'email',
@@ -21,18 +22,21 @@ export class ResourcesListComponent implements OnInit {
   ];
   constructor(private dataService: DataService, private store: Store<any>) {}
 
-  datasource: any;
+  datasource: MatTableDataSource<Resource>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
   ngOnInit() {
     this.resources$ = this.dataService.getResources();
     this.resources$.subscribe(data => {
-      this.datasource = new MatTableDataSource(data);
+      this.datasource = new MatTableDataSource<Resource>(data);
       this.datasource.paginator = this.paginator;
       this.store.dispatch({
         type: 'LOAD_RESOURCES',
         payload: data
       });
     });
+  }
+  applyFilter(filterValue: string) {
+    this.datasource.filter = filterValue.trim().toLowerCase();
   }
 }
