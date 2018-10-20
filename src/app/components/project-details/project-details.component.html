@@ -18,10 +18,9 @@
           </mat-list>
         </mat-tab>
         <mat-tab label="Activities">
-          <!-- TODO: turn this to a table -->
-          <mat-list role="list" *ngFor="let activity of project.activities">
-            <mat-list-item role="listitem">{{activity.title}}</mat-list-item>
-          </mat-list>
+          <!-- FIXME: there is a loading delay when switch from details to activities tab -->
+          <app-activities-list [activities]="project.activities">
+          </app-activities-list>
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>
