@@ -28,6 +28,7 @@ import { ResourceFormComponent } from './components/resource-form/resource-form.
 import { InMemoryWebApiService } from './services/in-memory-web-api.service';
 import { DataService } from './services/data.service';
 import { environment } from 'src/environments/environment.prod';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { environment } from 'src/environments/environment.prod';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApiService), // import after httpclientmodule import
     AppRoutingModule,

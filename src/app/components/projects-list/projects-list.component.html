@@ -1,10 +1,10 @@
-<mat-toolbar class="toolbar-heading">
+<mat-toolbar>
   <span>Projects</span>
-  <span>
-    <button [routerLink]="['/projects/create']" routerLinkActive="router-link-active" mat-raised-button color="primary">
-      <mat-icon>add</mat-icon> Create New
-    </button>
-  </span>
+  <span class="toolbar-spacer"></span>
+  <button (click)="createNewDialog()" mat-raised-button color="primary">
+    <mat-icon>add</mat-icon> Create New
+  </button>
+
 </mat-toolbar>
 <hr>
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" layout-wrap>

@@ -3,6 +3,8 @@ import { DataService } from 'src/app/services/data.service';
 import { Project } from 'src/app/models/project';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material';
+import { ProjectFormComponent } from '../project-form/project-form.component';
 
 @Component({
   selector: 'app-projects-list',
@@ -12,7 +14,12 @@ import { Store } from '@ngrx/store';
 export class ProjectsListComponent implements OnInit {
   projects$: Observable<Project[]>;
   loaded: boolean;
-  constructor(private dataService: DataService, private store: Store<any>) {}
+  project: Project;
+  constructor(
+    private dataService: DataService,
+    private store: Store<any>,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.projects$ = this.dataService.getProjects();
@@ -23,6 +30,16 @@ export class ProjectsListComponent implements OnInit {
         type: 'LOAD_PROJECTS',
         payload: data
       });
+    });
+  }
+
+  createNewDialog(): void {
+    const dialogRef = this.dialog.open(ProjectFormComponent, {
+      width: '450px'
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      this.project = data;
+      console.log('this dialog was closed', this.project);
     });
   }
 }

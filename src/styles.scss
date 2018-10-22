@@ -14,9 +14,8 @@ body {
     margin: 0 auto;
 }
 
-.toolbar-heading {
-    display: flex;
-    justify-content: space-between;
+.toolbar-spacer {
+    flex: 1 1 auto;
 }
 
 .mr-10 {
