@@ -1,4 +1,11 @@
-<h1>Projects</h1>
+<mat-toolbar class="toolbar-heading">
+  <span>Projects</span>
+  <span>
+    <button [routerLink]="['/projects/create']" routerLinkActive="router-link-active" mat-raised-button color="primary">
+      <mat-icon>add</mat-icon> Create New
+    </button>
+  </span>
+</mat-toolbar>
 <hr>
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" layout-wrap>
   <mat-spinner class="margin-auto" *ngIf="!loaded"></mat-spinner>

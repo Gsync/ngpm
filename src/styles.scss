@@ -7,9 +7,18 @@ body {
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .margin-auto {
     margin: 0 auto;
+}
+
+.toolbar-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mr-10 {
+    margin-right: 10px;
 }
