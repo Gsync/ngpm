@@ -45,8 +45,10 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       data: this.currentProject
     });
     dialogRef.afterClosed().subscribe(data => {
-      this.currentProject = data;
-      console.log('this dialog was closed', this.currentProject);
+      if (data) {
+        this.currentProject = data;
+        console.log('this dialog was closed', this.currentProject);
+      }
     });
   }
 }

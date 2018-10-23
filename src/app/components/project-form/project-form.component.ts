@@ -29,9 +29,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onSave() {
-    this.dataService.saveProject(this.project).subscribe(data => {
-      console.log('postResponse', data);
-    });
+    this.dataService.saveProject(this.project).subscribe();
     this.dialogRef.close(this.project);
   }
   onCancel() {

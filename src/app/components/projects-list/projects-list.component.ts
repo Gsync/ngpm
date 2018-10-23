@@ -38,9 +38,11 @@ export class ProjectsListComponent implements OnInit {
       width: '450px'
     });
     dialogRef.afterClosed().subscribe(data => {
-      this.project = data;
-      console.log('this dialog was closed', this.project);
-      this.projects$ = this.dataService.getProjects();
+      if (data) {
+        this.project = data;
+        console.log('this dialog was closed', this.project);
+        this.projects$ = this.dataService.getProjects();
+      }
     });
   }
 }
