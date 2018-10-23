@@ -1,10 +1,16 @@
-<div *ngIf="currentProject$ | async as project">
+<div *ngIf="currentProject as project">
+  <mat-toolbar>
+    <span>{{project.title}}</span>
+    <span class="toolbar-spacer"></span>
+    <button (click)="createNewDialog()" mat-raised-button color="primary">
+      <mat-icon>edit</mat-icon> Edit Project
+    </button>
+  </mat-toolbar>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <h2>{{project.title}}</h2>
+        Created on: {{ project.dateCreated | date:'d LLLL'}}
       </mat-card-title>
-      <mat-card-subtitle>Created on: {{ project.dateCreated | date:'d LLLL'}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <mat-tab-group>

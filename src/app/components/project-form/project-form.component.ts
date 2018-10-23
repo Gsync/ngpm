@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Project } from '../../models/project';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-project-form',
@@ -9,13 +11,27 @@ import { MatDialogRef } from '@angular/material';
 })
 export class ProjectFormComponent implements OnInit {
   project: Project;
-  constructor(private dialogRef: MatDialogRef<ProjectFormComponent>) {}
+  formTitle = 'Project Form';
+  constructor(
+    private dialogRef: MatDialogRef<ProjectFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogData: Project,
+    private dataService: DataService
+  ) {}
 
   ngOnInit() {
-    this.project = <Project>{};
+    if (this.dialogData) {
+      this.project = this.dialogData;
+      this.formTitle = 'Edit Project';
+    } else {
+      this.project = <Project>{};
+      this.formTitle = 'Add New Project';
+    }
   }
 
   onSave() {
+    this.dataService.saveProject(this.project).subscribe(data => {
+      console.log('postResponse', data);
+    });
     this.dialogRef.close(this.project);
   }
   onCancel() {

@@ -46,7 +46,7 @@ export class ResourcesListComponent implements OnInit {
     });
   }
   editResource(id: number) {
-    this.router.navigate([`/resources/edit/${id}`]);
+    this.router.navigate([`/resources/${id}/edit`]);
   }
   applyFilter(filterValue: string) {
     this.datasource.filter = filterValue.trim().toLowerCase();

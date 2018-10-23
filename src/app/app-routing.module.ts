@@ -9,11 +9,11 @@ import { ResourceFormComponent } from './components/resource-form/resource-form.
 const routes: Routes = [
   { path: 'projects', component: ProjectsListComponent },
   { path: 'resources', component: ResourcesListComponent },
-  { path: 'projects/create', component: ProjectFormComponent },
-  { path: 'resources/create', component: ResourceFormComponent },
   { path: 'projects/:id', component: ProjectDetailsComponent },
-  { path: 'projects/edit/:id', component: ProjectFormComponent },
-  { path: 'resources/edit/:id', component: ResourceFormComponent },
+  { path: 'projects/0/edit', component: ProjectFormComponent },
+  { path: 'resources/0/edit', component: ResourceFormComponent },
+  { path: 'projects/:id/edit', component: ProjectFormComponent },
+  { path: 'resources/:id/edit', component: ResourceFormComponent },
   { path: '', redirectTo: '/projects', pathMatch: 'full' }
 ];
 
