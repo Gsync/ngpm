@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Resource } from 'src/app/models/resource';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-resource-form',
@@ -12,7 +13,8 @@ export class ResourceFormComponent implements OnInit {
   resource: Resource;
   constructor(
     private dialogRef: MatDialogRef<ResourceFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: Resource
+    @Inject(MAT_DIALOG_DATA) public dialogData: Resource,
+    private dataService: DataService
   ) {}
 
   ngOnInit() {
@@ -24,7 +26,10 @@ export class ResourceFormComponent implements OnInit {
       this.resource = <Resource>{};
     }
   }
-  onSave() {}
+  onSave() {
+    this.dataService.saveResource(this.resource).subscribe();
+    this.dialogRef.close(this.resource);
+  }
 
   onCancel() {
     this.dialogRef.close(null);

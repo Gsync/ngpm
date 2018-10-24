@@ -17,6 +17,10 @@ export class DataService {
     return this.http.get<Project[]>(this.projectsUrl);
   }
 
+  getResources(): Observable<Resource[]> {
+    return this.http.get<Resource[]>(this.resourcesUrl);
+  }
+
   saveProject(project: Project) {
     if (project.id) {
       return this.updateProject(project);
@@ -26,6 +30,24 @@ export class DataService {
       project.activities = [];
       return this.createProject(project);
     }
+  }
+
+  saveResource(resource: Resource) {
+    if (resource.id) {
+      return null;
+    } else {
+      resource.activityId = null;
+      return this.createResource(resource);
+    }
+  }
+
+  createResource(resource: Resource) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    console.log('creating resource: ', resource);
+    return this.http.post(this.resourcesUrl, resource, { headers });
+  }
+  updateResource(resource: Resource) {
+    return;
   }
 
   createProject(project: Project) {
@@ -42,9 +64,5 @@ export class DataService {
   }
   getProjectById(id: number): Observable<Project> {
     return this.http.get(this.projectsUrl + '/' + id);
-  }
-
-  getResources(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(this.resourcesUrl);
   }
 }

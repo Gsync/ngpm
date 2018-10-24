@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Resource } from 'src/app/models/resource';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import {
   MatPaginator,
@@ -42,16 +43,7 @@ export class ResourcesListComponent implements OnInit {
   sort: MatSort;
 
   ngOnInit() {
-    this.resources$ = this.dataService.getResources();
-    this.resources$.subscribe(data => {
-      this.datasource = new MatTableDataSource<Resource>(data);
-      this.datasource.paginator = this.paginator;
-      this.datasource.sort = this.sort;
-      this.store.dispatch({
-        type: 'LOAD_RESOURCES',
-        payload: data
-      });
-    });
+    this.getResources();
   }
   createNewDialog(): void {
     const dialogRef = this.dialog.open(ResourceFormComponent, {
@@ -61,7 +53,7 @@ export class ResourcesListComponent implements OnInit {
       if (data) {
         this.resource = data;
         console.log('this dialog was closed', this.resource);
-        this.resources$ = this.dataService.getResources();
+        this.getResources();
       }
     });
   }
@@ -70,5 +62,14 @@ export class ResourcesListComponent implements OnInit {
   }
   applyFilter(filterValue: string) {
     this.datasource.filter = filterValue.trim().toLowerCase();
+  }
+  getResources() {
+    this.resources$ = this.dataService.getResources();
+    this.resources$.subscribe(data => {
+      this.datasource = new MatTableDataSource<Resource>(data);
+      this.datasource.paginator = this.paginator;
+      this.datasource.sort = this.sort;
+      this.store.dispatch({ type: 'LOAD_RESOURCES', payload: data });
+    });
   }
 }
