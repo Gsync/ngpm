@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Project } from 'src/app/models/project';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { ProjectFormComponent } from '../project-form/project-form.component';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-details',
@@ -14,7 +14,7 @@ import { ProjectFormComponent } from '../project-form/project-form.component';
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
   projectId: number;
   currentProject: Project;
-  private routeSubscription: any;
+  routeSubscription: any;
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
@@ -22,15 +22,31 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // TODO: Find out the draw back of nested subscriptions and how to avoid
-    this.routeSubscription = this.route.params.subscribe(params => {
-      this.projectId = +params['id'];
-      if (this.projectId !== null && this.projectId !== undefined) {
-        this.getProjectById(this.projectId).subscribe(data => {
+    this.routeSubscription = this.route.params
+      .pipe(
+        flatMap(params => {
+          if (params) {
+            this.projectId = +params['id'];
+            return this.getProjectById(this.projectId);
+          }
+        })
+      )
+      .subscribe(data => {
+        if (data) {
           this.currentProject = data;
-        });
-      }
-    });
+        }
+      });
+
+    // NOTE: Above subscription block is the refactor of the following commented block with nested subscriptions
+    //
+    // this.routeSubscription = this.route.params.subscribe(params => {
+    //   this.projectId = +params['id'];
+    //   if (this.projectId !== null && this.projectId !== undefined) {
+    //     this.getProjectById(this.projectId).subscribe(data => {
+    //       this.currentProject = data;
+    //     });
+    //   }
+    // });
   }
 
   ngOnDestroy() {
