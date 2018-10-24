@@ -1,7 +1,7 @@
 <mat-toolbar>
   <span>Resources</span>
   <span class="toolbar-spacer"></span>
-  <button [routerLink]="['/resources/create']" routerLinkActive="router-link-active" mat-raised-button color="primary">
+  <button (click)="createNewDialog()" mat-raised-button color="primary">
     <mat-icon>add</mat-icon> Create New
   </button>
 

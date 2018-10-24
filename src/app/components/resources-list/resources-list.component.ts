@@ -3,8 +3,14 @@ import { DataService } from 'src/app/services/data.service';
 import { Resource } from 'src/app/models/resource';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import {
+  MatPaginator,
+  MatTableDataSource,
+  MatSort,
+  MatDialog
+} from '@angular/material';
 import { Router } from '@angular/router';
+import { ResourceFormComponent } from '../resource-form/resource-form.component';
 
 @Component({
   selector: 'app-resources-list',
@@ -13,6 +19,7 @@ import { Router } from '@angular/router';
 })
 export class ResourcesListComponent implements OnInit {
   resources$: Observable<Resource[]>;
+  resource: Resource;
   displayedColumns: string[] = [
     'position',
     'name',
@@ -24,7 +31,8 @@ export class ResourcesListComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private store: Store<any>,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   datasource: MatTableDataSource<Resource>;
@@ -43,6 +51,18 @@ export class ResourcesListComponent implements OnInit {
         type: 'LOAD_RESOURCES',
         payload: data
       });
+    });
+  }
+  createNewDialog(): void {
+    const dialogRef = this.dialog.open(ResourceFormComponent, {
+      width: '450px'
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.resource = data;
+        console.log('this dialog was closed', this.resource);
+        this.resources$ = this.dataService.getResources();
+      }
     });
   }
   editResource(id: number) {

@@ -34,6 +34,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (data) {
           this.currentProject = data;
+          // NOTE: Can add store update here
         }
       });
 
