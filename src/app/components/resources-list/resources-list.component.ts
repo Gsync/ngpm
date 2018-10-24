@@ -45,9 +45,11 @@ export class ResourcesListComponent implements OnInit {
   ngOnInit() {
     this.getResources();
   }
-  createNewDialog(): void {
+
+  createNewDialog(resource: Resource): void {
     const dialogRef = this.dialog.open(ResourceFormComponent, {
-      width: '450px'
+      width: '450px',
+      data: resource
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
@@ -57,8 +59,8 @@ export class ResourcesListComponent implements OnInit {
       }
     });
   }
-  editResource(id: number) {
-    this.router.navigate([`/resources/${id}/edit`]);
+  getResourceById(id: number) {
+    return this.dataService.getResourceById(id);
   }
   applyFilter(filterValue: string) {
     this.datasource.filter = filterValue.trim().toLowerCase();

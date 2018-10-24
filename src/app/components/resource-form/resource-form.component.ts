@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Resource } from 'src/app/models/resource';
 import { DataService } from 'src/app/services/data.service';
@@ -13,7 +13,9 @@ export class ResourceFormComponent implements OnInit {
   resource: Resource;
   constructor(
     private dialogRef: MatDialogRef<ResourceFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: Resource,
+    @Optional()
+    @Inject(MAT_DIALOG_DATA)
+    public dialogData: Resource,
     private dataService: DataService
   ) {}
 

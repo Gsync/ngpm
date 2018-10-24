@@ -51,7 +51,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef class="align-col-right"> Actions </th>
         <td mat-cell *matCellDef="let element" class="align-col-right">
-          <button (click)="editResource(element.id)" mat-button color="primary">Edit</button>
+          <button (click)="createNewDialog(element)" mat-button color="primary">Edit</button>
           <button mat-button color="warn">Delete</button>
         </td>
       </ng-container>
