@@ -1,6 +1,6 @@
-<app-toolbar (toggleSidenav)="toggleSidenav()"></app-toolbar>
+<app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" class="app-sidenav" [opened]="showSidenav">
+  <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" class="app-sidenav" [opened]="mobileQuery.matches ? false : true">
     <mat-toolbar>
       <span>Dashboard</span>
     </mat-toolbar>

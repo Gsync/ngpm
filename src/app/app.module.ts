@@ -62,7 +62,6 @@ import { FormsModule } from '@angular/forms';
     })
   ],
   providers: [DataService],
-  entryComponents: [ProjectFormComponent, ResourceFormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

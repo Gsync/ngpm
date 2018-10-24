@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy
+} from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store/reducer';
@@ -8,11 +15,28 @@ import { State } from 'src/app/store/reducer';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy {
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   showSidenav: boolean;
   @ViewChild('sidenav')
   sidenav: MatSidenav;
-  constructor(private store: Store<State>) {}
+  constructor(
+    private store: Store<State>,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px');
+    this._mobileQueryListener = () => {
+      changeDetectorRef.detectChanges();
+      if (this.mobileQuery.matches) {
+        this.showSidenav = false;
+      } else {
+        this.showSidenav = true;
+      }
+    };
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit() {
     this.store.select('appState').subscribe(store => {
@@ -21,6 +45,10 @@ export class SidenavComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+  // TODO: Update the store state to use showSidnav or remove it
   toggleSidenav(): void {
     this.showSidenav = !this.showSidenav;
     this.store.dispatch({
