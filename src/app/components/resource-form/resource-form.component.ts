@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Resource } from 'src/app/models/resource';
 import { DataService } from 'src/app/services/data.service';
 import { FormControl, Validators } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-resource-form',
@@ -18,7 +19,8 @@ export class ResourceFormComponent implements OnInit {
     @Optional()
     @Inject(MAT_DIALOG_DATA)
     public dialogData: Resource,
-    private dataService: DataService
+    private dataService: DataService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -31,8 +33,15 @@ export class ResourceFormComponent implements OnInit {
     }
   }
   onSave() {
-    this.dataService.saveResource(this.resource).subscribe();
-    this.dialogRef.close(this.resource);
+    this.dataService
+      .saveResource(this.resource)
+      .pipe(
+        tap(() => {
+          this.openSnackBar('Resource Created', 'Added');
+          this.dialogRef.close(this.resource);
+        })
+      )
+      .subscribe();
   }
 
   onCancel() {
@@ -45,5 +54,10 @@ export class ResourceFormComponent implements OnInit {
       : this.email.hasError('email')
         ? 'Please enter a valid email'
         : '';
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 }

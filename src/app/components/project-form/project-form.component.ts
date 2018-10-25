@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Project } from '../../models/project';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DataService } from 'src/app/services/data.service';
+import { tap } from 'rxjs/operators';
 
 export interface Priority {
   value: number;
@@ -22,8 +23,9 @@ export class ProjectFormComponent implements OnInit {
   ];
   constructor(
     private dialogRef: MatDialogRef<ProjectFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: Project,
-    private dataService: DataService
+    @Inject(MAT_DIALOG_DATA) private dialogData: Project,
+    private dataService: DataService,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -37,10 +39,23 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onSave() {
-    this.dataService.saveProject(this.project).subscribe();
-    this.dialogRef.close(this.project);
+    this.dataService
+      .saveProject(this.project)
+      .pipe(
+        tap(() => {
+          this.openSnackBar('Project Created', 'Added');
+          this.dialogRef.close(this.project);
+        })
+      )
+      .subscribe();
   }
   onCancel() {
     this.dialogRef.close(null);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 }
