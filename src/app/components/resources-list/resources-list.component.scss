@@ -1,12 +1,15 @@
-table {
-  width: 100%;
+.table-container {
+    min-width: 500px;
+    table {
+        width: 100%;
+    }
 }
 
 .align-col-right {
-  text-align: center;
+    text-align: center;
 }
 
 .mat-form-field {
-  font-size: 14px;
-  width: 100%;
+    font-size: 14px;
+    width: 100%;
 }
