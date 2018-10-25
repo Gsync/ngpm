@@ -7,13 +7,16 @@
 
 </mat-toolbar>
 <hr>
-<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" layout-wrap>
+<div class="card-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign='start center'
+  mat-elevation-z2>
   <mat-spinner class="margin-auto" *ngIf="!loaded"></mat-spinner>
-  <div fxFlex="30%" *ngFor="let project of projects$ | async">
-    <mat-card [routerLink]="['/projects', project.id]" class="project-card" *ngIf="project">
-      <mat-card-title>{{project.title}}</mat-card-title>
-      <mat-card-subtitle>Created: {{project.dateCreated}}</mat-card-subtitle>
-      <mat-card-subtitle>Created by: {{project.personCreated}}</mat-card-subtitle>
+  <div *ngFor="let project of projects$ | async">
+    <mat-card fxFlex [routerLink]="['/projects', project.id]" class="card-item" *ngIf="project">
+      <mat-card-header>
+        <mat-card-title class="card-title">{{project.title}}</mat-card-title>
+        <mat-card-subtitle>Created: {{project.dateCreated}}</mat-card-subtitle>
+        <mat-card-subtitle>Created by: {{project.personCreated}}</mat-card-subtitle>
+      </mat-card-header>
     </mat-card>
   </div>
 </div>
