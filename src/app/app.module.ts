@@ -1,20 +1,20 @@
-import 'hammerjs';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import "hammerjs";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 
 // Store
-import { StoreModule } from '@ngrx/store';
-import { reducer, initialState } from './store/reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from "@ngrx/store";
+import { reducer, initialState } from "./store/reducer";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/material/material.module';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MaterialModule } from "./shared/material/material.module";
+import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
@@ -28,7 +28,7 @@ import { ResourceFormComponent } from './components/resource-form/resource-form.
 import { InMemoryWebApiService } from './services/in-memory-web-api.service';
 import { DataService } from './services/data.service';
 import { environment } from 'src/environments/environment.prod';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApiService), // import after httpclientmodule import
     AppRoutingModule,

@@ -8,13 +8,14 @@
       <input matInput placeholder="Last Name" [(ngModel)]="resource.lastName" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Email" [(ngModel)]="resource.email" required>
+      <input matInput name="email" placeholder="Email" [(ngModel)]="resource.email" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Designation" [(ngModel)]="resource.designation" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Phone" [(ngModel)]="resource.phone" required>
+      <input matInput placeholder="Phone Number" [(ngModel)]="resource.phone" required>
     </mat-form-field>
   </div>
 </mat-dialog-content>

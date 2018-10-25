@@ -111,6 +111,122 @@ const data = {
           hoursWorked: 0
         }
       ]
+    },
+    {
+      id: 3,
+      title: 'Order Management App',
+      dateCreated: '2018-04-24T19:16:37Z',
+      personCreated: 'khuram',
+      priority: 2,
+      status: 3,
+      activities: [
+        {
+          id: 11,
+          title: 'Plan App',
+          description: 'Gather requirements and plan',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 12,
+          title: 'Design App',
+          description: 'Design the prototype',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 13,
+          title: 'Build App',
+          description: 'Application development',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 14,
+          title: 'Test App',
+          description: 'Perform testing',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 15,
+          title: 'Deploy App',
+          description: 'Deploy the App',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 16,
+          title: 'Market App',
+          description: 'Market the App',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: 'Real Estate Management App',
+      dateCreated: '2018-04-24T19:16:37Z',
+      personCreated: 'khuram',
+      priority: 2,
+      status: 3,
+      activities: [
+        {
+          id: 17,
+          title: 'Plan App',
+          description: 'Gather requirements and plan',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 18,
+          title: 'Design App',
+          description: 'Design the prototype',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 19,
+          title: 'Build App',
+          description: 'Application development',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 20,
+          title: 'Test App',
+          description: 'Perform testing',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 21,
+          title: 'Deploy App',
+          description: 'Deploy the App',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        },
+        {
+          id: 22,
+          title: 'Market App',
+          description: 'Market the App',
+          dateCreated: '2018-04-24T19:16:37Z',
+          resourceId: 1,
+          hoursWorked: 0
+        }
+      ]
     }
   ],
   resources: [

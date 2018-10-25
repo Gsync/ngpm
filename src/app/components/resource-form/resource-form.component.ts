@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Resource } from 'src/app/models/resource';
 import { DataService } from 'src/app/services/data.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-resource-form',
@@ -11,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 export class ResourceFormComponent implements OnInit {
   formTitle: string;
   resource: Resource;
+  email = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private dialogRef: MatDialogRef<ResourceFormComponent>,
     @Optional()
@@ -35,5 +37,13 @@ export class ResourceFormComponent implements OnInit {
 
   onCancel() {
     this.dialogRef.close(null);
+  }
+
+  getErrorMessage() {
+    return this.email.hasError('required')
+      ? 'You must enter an email'
+      : this.email.hasError('email')
+        ? 'Please enter a valid email'
+        : '';
   }
 }

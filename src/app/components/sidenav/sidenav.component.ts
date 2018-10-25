@@ -26,7 +26,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px');
+    this.mobileQuery = media.matchMedia('(max-width: 768px'); // size of an ipad
     this._mobileQueryListener = () => {
       changeDetectorRef.detectChanges();
       if (this.mobileQuery.matches) {

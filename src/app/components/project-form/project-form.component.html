@@ -5,10 +5,19 @@
       <input matInput placeholder="Title" [(ngModel)]="project.title" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Date Created" [(ngModel)]="project.dateCreated" required>
+      <input matInput [matDatepicker]="picker" placeholder="Date Created" [(ngModel)]="project.dateCreated" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Person Created" [(ngModel)]="project.personCreated" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select matInput placeholder="Priority" [(ngModel)]="project.priority" required>
+        <mat-option *ngFor="let priority of priorities" [value]="priority.value">
+          {{priority.title}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
 </mat-dialog-content>
