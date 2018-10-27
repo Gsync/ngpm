@@ -26,9 +26,6 @@ export class DataService {
     if (project._id) {
       return this.updateProject(project);
     } else {
-      project.priority = 1;
-      project.status = 1;
-      project.activities = [];
       return this.createProject(project);
     }
   }
