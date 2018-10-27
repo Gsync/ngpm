@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
-import { Project } from 'src/app/models/project';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { MatDialog } from '@angular/material';
-import { ProjectFormComponent } from '../project-form/project-form.component';
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "src/app/services/data.service";
+import { Project } from "src/app/models/project";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+import { MatDialog } from "@angular/material";
+import { ProjectFormComponent } from "../project-form/project-form.component";
 
 @Component({
   selector: 'app-projects-list',
@@ -23,8 +23,8 @@ export class ProjectsListComponent implements OnInit {
 
   ngOnInit() {
     this.projects$ = this.dataService.getProjects();
-    console.log({ projects: this.projects$ });
     this.projects$.subscribe(data => {
+      console.log('newdata', data);
       this.loaded = true;
       this.store.dispatch({
         type: 'LOAD_PROJECTS',

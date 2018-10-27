@@ -8,7 +8,8 @@ import { Resource } from '../models/resource';
   providedIn: 'root'
 })
 export class DataService {
-  private projectsUrl = '/api/projects';
+  private projectsUrl = 'http://localhost:4000/api/projects';
+
   private resourcesUrl = '/api/resources';
 
   constructor(private http: HttpClient) {}
@@ -22,7 +23,7 @@ export class DataService {
   }
 
   saveProject(project: Project) {
-    if (project.id) {
+    if (project._id) {
       return this.updateProject(project);
     } else {
       project.priority = 1;
@@ -62,11 +63,11 @@ export class DataService {
   updateProject(project: Project) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log('updating project: ', project);
-    return this.http.put(this.projectsUrl + '/' + project.id, project, {
+    return this.http.put(this.projectsUrl + '/' + project._id, project, {
       headers
     });
   }
-  getProjectById(id: number): Observable<Project> {
+  getProjectById(id: string): Observable<Project> {
     return this.http.get(this.projectsUrl + '/' + id);
   }
   getResourceById(id: number): Observable<Resource> {

@@ -1,20 +1,20 @@
-import "hammerjs";
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import 'hammerjs';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 // Store
-import { StoreModule } from "@ngrx/store";
-import { reducer, initialState } from "./store/reducer";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { StoreModule } from '@ngrx/store';
+import { reducer, initialState } from './store/reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MaterialModule } from "./shared/material/material.module";
-import { ToolbarComponent } from "./components/toolbar/toolbar.component";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/material/material.module';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
@@ -50,7 +50,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApiService), // import after httpclientmodule import
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApiService), // import after httpclientmodule import
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,

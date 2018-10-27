@@ -12,7 +12,7 @@ import { flatMap } from 'rxjs/operators';
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
-  projectId: number;
+  projectId: string;
   currentProject: Project;
   routeSubscription: any;
   constructor(
@@ -26,7 +26,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       .pipe(
         flatMap(params => {
           if (params) {
-            this.projectId = +params['id'];
+            this.projectId = params['id'];
             return this.getProjectById(this.projectId);
           }
         })
@@ -53,7 +53,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
   }
-  getProjectById(id: number) {
+  getProjectById(id: string) {
     return this.dataService.getProjectById(id);
   }
   createNewDialog(): void {

@@ -11,7 +11,7 @@
   mat-elevation-z2>
   <mat-spinner class="margin-auto" *ngIf="!loaded"></mat-spinner>
   <div *ngFor="let project of projects$ | async">
-    <mat-card fxFlex [routerLink]="['/projects', project.id]" class="card-item" *ngIf="project">
+    <mat-card fxFlex [routerLink]="['/projects', project._id]" class="card-item" *ngIf="project">
       <mat-card-header>
         <mat-card-title class="card-title">{{project.title}}</mat-card-title>
         <mat-card-subtitle>Created: {{project.dateCreated}}</mat-card-subtitle>

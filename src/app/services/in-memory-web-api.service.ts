@@ -13,7 +13,7 @@ export class InMemoryWebApiService implements InMemoryDbService {
 const data = {
   projects: [
     {
-      id: 1,
+      id: '1',
       title: 'Project Management App',
       dateCreated: '2018-04-24T19:16:37Z',
       personCreated: 'khuram',
@@ -55,7 +55,7 @@ const data = {
       ]
     },
     {
-      id: 2,
+      id: '2',
       title: 'Event Management App',
       dateCreated: '2018-04-24T19:16:37Z',
       personCreated: 'khuram',
@@ -113,7 +113,7 @@ const data = {
       ]
     },
     {
-      id: 3,
+      id: '3',
       title: 'Order Management App',
       dateCreated: '2018-04-24T19:16:37Z',
       personCreated: 'khuram',
@@ -171,7 +171,7 @@ const data = {
       ]
     },
     {
-      id: 4,
+      id: '4',
       title: 'Real Estate Management App',
       dateCreated: '2018-04-24T19:16:37Z',
       personCreated: 'khuram',
