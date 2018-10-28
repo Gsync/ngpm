@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { MatDialog } from '@angular/material';
 import { ProjectFormComponent } from '../project-form/project-form.component';
@@ -18,7 +18,8 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -56,6 +57,16 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   getProjectById(id: string) {
     return this.dataService.getProjectById(id);
   }
+
+  deleteProject() {
+    if (confirm(`Really delete the project: ${this.currentProject.title}?`)) {
+      this.dataService.deleteProject(this.projectId).subscribe(() => {
+        console.log(`${this.currentProject.title} was deleted`);
+        this.router.navigateByUrl('/projects');
+      });
+    }
+  }
+
   createNewDialog(): void {
     const dialogRef = this.dialog.open(ProjectFormComponent, {
       width: '450px',

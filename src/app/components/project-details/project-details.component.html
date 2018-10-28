@@ -3,7 +3,10 @@
     <span>{{project.title}}</span>
     <span class="toolbar-spacer"></span>
     <button (click)="createNewDialog()" mat-raised-button color="primary">
-      <mat-icon>edit</mat-icon> Edit Project
+      <mat-icon>edit</mat-icon> Edit
+    </button>
+    <button (click)="deleteProject()" mat-raised-button color="warn">
+      <mat-icon>delete</mat-icon> Delete
     </button>
   </mat-toolbar>
   <mat-card>

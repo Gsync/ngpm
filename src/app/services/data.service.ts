@@ -12,6 +12,8 @@ export class DataService {
 
   private resourcesUrl = '/api/resources';
 
+  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   constructor(private http: HttpClient) {}
 
   getProjects(): Observable<Project[]> {
@@ -40,28 +42,26 @@ export class DataService {
   }
 
   createResource(resource: Resource) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log('creating resource: ', resource);
-    return this.http.post(this.resourcesUrl, resource, { headers });
+    return this.http.post(this.resourcesUrl, resource, {
+      headers: this.headers
+    });
   }
   updateResource(resource: Resource) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log('updating project: ', resource);
     return this.http.put(this.resourcesUrl + '/' + resource.id, resource, {
-      headers
+      headers: this.headers
     });
   }
 
   createProject(project: Project) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log('creating project: ', project);
-    return this.http.post(this.projectsUrl, project, { headers });
+    return this.http.post(this.projectsUrl, project, { headers: this.headers });
   }
   updateProject(project: Project) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log('updating project: ', project);
     return this.http.put(this.projectsUrl + '/' + project._id, project, {
-      headers
+      headers: this.headers
     });
   }
   getProjectById(id: string): Observable<Project> {
@@ -69,5 +69,11 @@ export class DataService {
   }
   getResourceById(id: number): Observable<Resource> {
     return this.http.get(this.resourcesUrl + '/' + id);
+  }
+
+  deleteProject(id: string): Observable<Project> {
+    return this.http.delete(this.projectsUrl + '/' + id, {
+      headers: this.headers
+    });
   }
 }
