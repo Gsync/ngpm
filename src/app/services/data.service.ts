@@ -84,7 +84,16 @@ export class DataService {
     );
   }
 
-  updateActivity() {}
+  updateActivity(projectId: string, activityId: string) {}
+
+  deleteActivity(projectId: string, activityId: string) {
+    return this.http.delete(
+      `${this.projectsUrl}/${projectId}/activity/${activityId}`,
+      {
+        headers: this.headers
+      }
+    );
+  }
 
   getProjectById(id: string): Observable<Project> {
     return this.http.get(this.projectsUrl + '/' + id);

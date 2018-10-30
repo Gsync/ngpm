@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Activity } from 'src/app/models/activity';
+import { Project } from 'src/app/models/project';
+import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activities-list',
@@ -10,7 +13,7 @@ import { Activity } from 'src/app/models/activity';
 export class ActivitiesListComponent implements OnInit {
   // FIXME Performance issue while switching from details to activites
   @Input()
-  activities: Activity[];
+  project: Project;
   dataSource: MatTableDataSource<Activity>;
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -22,13 +25,34 @@ export class ActivitiesListComponent implements OnInit {
     'description',
     'actions'
   ];
-  constructor() {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<Activity>(this.activities);
+    this.getActivities();
+  }
+  getActivities() {
+    this.dataSource = new MatTableDataSource<Activity>(this.project.activities);
     this.dataSource.paginator = this.paginator;
+  }
+
+  deleteActivity(activityId: string) {
+    if (confirm(`Really delete this activity?`)) {
+      this.dataService
+        .deleteActivity(this.project._id, activityId)
+        .subscribe(() => {
+          // Refresh DataTable to remove activity row from datasource.
+          this.deleteRowDataTable(activityId, this.paginator, this.dataSource);
+        });
+    }
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  // Remove the deleted row from the data table. Need to remove from the downloaded data first.
+  private deleteRowDataTable(activityId, paginator, dataSource) {
+    const dsData = dataSource.data;
+    const itemIndex = dsData.findIndex(obj => obj['_id'] === activityId);
+    dataSource.data.splice(itemIndex, 1);
+    dataSource.paginator = paginator;
   }
 }
