@@ -5,6 +5,7 @@ import { Project } from 'src/app/models/project';
 import { MatDialog } from '@angular/material';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { flatMap } from 'rxjs/operators';
+import { ActivityFormComponent } from '../activity-form/activity-form.component';
 
 @Component({
   selector: 'app-project-details',
@@ -19,7 +20,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -77,6 +78,12 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         this.currentProject = data;
         console.log('this dialog was closed', this.currentProject);
       }
+    });
+  }
+  activityDialog(): void {
+    const dialogRef = this.dialog.open(ActivityFormComponent, {
+      width: '450px',
+      data: this.currentProject._id
     });
   }
 }

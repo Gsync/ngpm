@@ -45,6 +45,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProjectFormComponent,
     ResourceFormComponent
   ],
+  entryComponents: [ActivityFormComponent],
   imports: [
     BrowserModule,
     FormsModule,

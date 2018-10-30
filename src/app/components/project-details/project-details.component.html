@@ -10,10 +10,12 @@
     </button>
   </mat-toolbar>
   <mat-card>
-    <mat-card-header>
+    <mat-card-header class="details-header">
       <mat-card-title>
         Created on: {{ project.dateCreated | date:'d LLLL'}}
-      </mat-card-title>
+      </mat-card-title><button (click)="activityDialog()" mat-raised-button color="primary">
+        <mat-icon>add</mat-icon> Add Activity
+      </button>
     </mat-card-header>
     <mat-card-content>
       <mat-tab-group>

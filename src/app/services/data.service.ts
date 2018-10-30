@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project } from '../models/project';
 import { Observable } from 'rxjs';
 import { Resource } from '../models/resource';
+import { Activity } from '../models/activity';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,27 @@ export class DataService {
       headers: this.headers
     });
   }
+  saveActivity(projectId: string, activity: Activity) {
+    if (activity._id) {
+      return null; // TODO: to be added
+    } else {
+      return this.addActivity(projectId, activity);
+    }
+  }
+
+  addActivity(projectId: string, activity: Activity) {
+    console.log('adding activity to projectid : ', projectId);
+    return this.http.put(
+      `${this.projectsUrl}/${projectId}/activity/add`,
+      activity,
+      {
+        headers: this.headers
+      }
+    );
+  }
+
+  updateActivity() {}
+
   getProjectById(id: string): Observable<Project> {
     return this.http.get(this.projectsUrl + '/' + id);
   }
