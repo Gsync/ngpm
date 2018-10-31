@@ -67,7 +67,7 @@ export class DataService {
   }
   saveActivity(projectId: string, activity: Activity) {
     if (activity._id) {
-      return null; // TODO: to be added
+      return this.updateActivity(projectId, activity); // TODO: to be added
     } else {
       return this.addActivity(projectId, activity);
     }
@@ -84,7 +84,15 @@ export class DataService {
     );
   }
 
-  updateActivity(projectId: string, activityId: string) {}
+  updateActivity(projectId: string, activity: Activity) {
+    return this.http.put(
+      `${this.projectsUrl}/${projectId}/activity/${activity._id}`,
+      activity,
+      {
+        headers: this.headers
+      }
+    );
+  }
 
   deleteActivity(projectId: string, activityId: string) {
     return this.http.delete(

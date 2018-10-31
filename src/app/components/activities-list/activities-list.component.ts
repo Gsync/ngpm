@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { Activity } from 'src/app/models/activity';
 import { Project } from 'src/app/models/project';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
+import { ActivityFormComponent } from '../activity-form/activity-form.component';
 
 @Component({
   selector: 'app-activities-list',
@@ -25,7 +26,11 @@ export class ActivitiesListComponent implements OnInit {
     'description',
     'actions'
   ];
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.getActivities();
@@ -33,6 +38,13 @@ export class ActivitiesListComponent implements OnInit {
   getActivities() {
     this.dataSource = new MatTableDataSource<Activity>(this.project.activities);
     this.dataSource.paginator = this.paginator;
+  }
+
+  activityDialog(activity: Activity): void {
+    const dialogRef = this.dialog.open(ActivityFormComponent, {
+      width: '450px',
+      data: { activity: activity, currentProjectId: this.project._id }
+    });
   }
 
   deleteActivity(activityId: string) {

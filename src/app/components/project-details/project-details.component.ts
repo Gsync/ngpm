@@ -83,7 +83,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   activityDialog(): void {
     const dialogRef = this.dialog.open(ActivityFormComponent, {
       width: '450px',
-      data: this.currentProject._id
+      data: { currentProjectId: this.currentProject._id }
     });
   }
 }

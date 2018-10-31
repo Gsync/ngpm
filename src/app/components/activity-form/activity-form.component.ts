@@ -12,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 export class ActivityFormComponent implements OnInit {
   formTitle = 'Activity Form';
   currentProjectId: string;
+  activityId: string;
   activity: Activity = {
     title: '',
     personCreated: '',
@@ -25,11 +26,15 @@ export class ActivityFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentProjectId = this.dialogData;
-    if (this.activity._id) {
+    this.currentProjectId = this.dialogData.currentProjectId;
+    if (this.dialogData.activity) {
+      this.activity = this.dialogData.activity;
+      console.log('activity: ', this.activity);
       this.formTitle = 'Edit Activity';
     } else {
       this.formTitle = 'Add New Activity';
+      this.activity = <Activity>{};
+      console.log('activity: ', this.activity);
     }
   }
 
@@ -39,7 +44,7 @@ export class ActivityFormComponent implements OnInit {
       .pipe(
         tap(() => {
           this.openSnackBar('Activity Created', 'Added');
-          this.dialogRef.close(null);
+          this.dialogRef.close(this.activity);
         })
       )
       .subscribe();
