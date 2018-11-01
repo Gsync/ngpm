@@ -49,7 +49,7 @@ export class ActivityFormComponent implements OnInit {
       )
       .subscribe();
 
-    // TODO: Refresh page to show updated activities
+    // TODO: Refresh page to show updated activities works on edit but not on add activity
   }
 
   onCancel() {
