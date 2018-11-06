@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project } from '../models/project';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Resource } from '../models/resource';
 import { Activity } from '../models/activity';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  private projects: Project[];
   private projectsUrl = 'http://localhost:4000/api/projects';
 
   private resourcesUrl = '/api/resources';
@@ -18,7 +20,13 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projectsUrl);
+    if (this.projects) {
+      return of(this.projects);
+    }
+    return this.http.get<Project[]>(this.projectsUrl).pipe(
+      tap(data => (this.projects = data)),
+      tap(data => console.log('getprojects from service: ', data))
+    );
   }
 
   getResources(): Observable<Resource[]> {
@@ -104,7 +112,15 @@ export class DataService {
   }
 
   getProjectById(id: string): Observable<Project> {
-    return this.http.get(this.projectsUrl + '/' + id);
+    if (this.projects) {
+      const foundProject = this.projects.find(project => project._id === id);
+      if (foundProject) {
+        return of(foundProject);
+      }
+    }
+    return this.http
+      .get(this.projectsUrl + '/' + id)
+      .pipe(tap(data => console.log('getprojectbyid from service: ', data)));
   }
   getResourceById(id: number): Observable<Resource> {
     return this.http.get(this.resourcesUrl + '/' + id);
