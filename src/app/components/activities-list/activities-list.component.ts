@@ -19,11 +19,10 @@ export class ActivitiesListComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
   displayedColumns: string[] = [
-    'position',
     'title',
     'dateCreated',
     'hoursWorked',
-    'description',
+    'percentComplete',
     'actions'
   ];
   constructor(

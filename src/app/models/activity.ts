@@ -4,6 +4,7 @@ export interface Activity {
   description?: string;
   dateCreated?: string;
   personCreated?: string;
+  percentComplete?: number;
   resourceId?: number;
   hoursWorked?: number;
 }

@@ -8,6 +8,14 @@
       <input matInput placeholder="Person Created" [(ngModel)]="activity.personCreated" required>
     </mat-form-field>
     <mat-form-field>
+      <input matInput type="number" placeholder="Hours Worked" [(ngModel)]="activity.hoursWorked" required>
+      <span matSuffix>&nbsp; hours</span>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Percent Complete" [(ngModel)]="activity.percentComplete" required>
+      <span matSuffix>&nbsp; %</span>
+    </mat-form-field>
+    <mat-form-field>
       <textarea matInput placeholder="Description" [(ngModel)]="activity.description"></textarea>
     </mat-form-field>
   </div>

@@ -5,6 +5,7 @@ export interface Project {
   title?: string;
   dateCreated?: string;
   personCreated?: string;
+  percentComplete?: number;
   priority?: number;
   status?: number;
   activities?: Activity[];
