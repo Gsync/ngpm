@@ -64,8 +64,12 @@ export class DataService {
   }
 
   createProject(project: Project) {
-    console.log('creating project: ', project);
-    return this.http.post(this.projectsUrl, project, { headers: this.headers });
+    return this.http
+      .post(this.projectsUrl, project, { headers: this.headers })
+      .pipe(
+        tap(data => console.log('createProject: ', data)),
+        tap(data => this.projects.push(data))
+      );
   }
   updateProject(project: Project) {
     console.log('updating project: ', project);
@@ -127,8 +131,20 @@ export class DataService {
   }
 
   deleteProject(id: string): Observable<Project> {
-    return this.http.delete(this.projectsUrl + '/' + id, {
-      headers: this.headers
-    });
+    return this.http
+      .delete(this.projectsUrl + '/' + id, {
+        headers: this.headers
+      })
+      .pipe(
+        tap(data => console.log('deleteProject: ', data)),
+        tap(data => {
+          const foundIndex = this.projects.findIndex(
+            project => project._id === id
+          );
+          if (foundIndex > -1) {
+            this.projects.splice(foundIndex, 1);
+          }
+        })
+      );
   }
 }
