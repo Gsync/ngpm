@@ -1,20 +1,19 @@
-<div *ngIf="currentProject as project">
+<div *ngIf="currentProject as project" fxFlex>
   <mat-toolbar>
-    <span>{{project.title}}</span>
-    <span class="toolbar-spacer"></span>
+    <span>{{ project.title }}</span> <span class="toolbar-spacer"></span>
     <button (click)="createNewDialog()" mat-raised-button color="primary">
-      <mat-icon>edit</mat-icon> Edit
+      <mat-icon>edit</mat-icon> <span fxHide.xs>Edit</span>
     </button>
     <button (click)="deleteProject()" mat-raised-button color="warn">
-      <mat-icon>delete</mat-icon> Delete
+      <mat-icon>delete</mat-icon> <span fxHide.xs>Delete</span>
     </button>
   </mat-toolbar>
   <mat-card>
     <mat-card-header class="details-header">
       <mat-card-title>
-        Created on: {{ project.dateCreated | date:'d LLLL'}}
-      </mat-card-title><button (click)="activityDialog()" mat-raised-button color="primary">
-        <mat-icon>add</mat-icon> Add Activity
+        Created on: {{ project.dateCreated | date: "d LLLL" }} </mat-card-title
+      ><button (click)="activityDialog()" mat-raised-button color="primary">
+        <mat-icon>add</mat-icon> <span fxHide.xs>Add Activity</span>
       </button>
     </mat-card-header>
     <mat-card-content>
@@ -22,17 +21,29 @@
         <mat-tab label="Details">
           <p></p>
           <mat-list role="list">
-            <mat-list-item role="listitem">Created by: {{project.personCreated}}</mat-list-item>
-            <mat-list-item role="listitem">Priority: {{project.priority}}</mat-list-item>
-            <mat-list-item role="listitem">Completed (%): {{project.percentComplete}}%</mat-list-item>
-            <mat-list-item role="listitem">Status: {{project.status}}</mat-list-item>
-            <mat-list-item role="listitem">Number of Activities: {{project.activities.length}}</mat-list-item>
+            <mat-list-item role="listitem"
+              >Created by: {{ project.personCreated }}</mat-list-item
+            >
+            <mat-list-item role="listitem"
+              >Priority: {{ project.priority }}</mat-list-item
+            >
+            <mat-list-item role="listitem"
+              >Completed (%): {{ project.percentComplete }}%</mat-list-item
+            >
+            <mat-list-item role="listitem"
+              >Status: {{ project.status }}</mat-list-item
+            >
+            <mat-list-item role="listitem"
+              >Number of Activities:
+              {{ project.activities.length }}</mat-list-item
+            >
           </mat-list>
         </mat-tab>
         <mat-tab label="Activities">
-          <!-- FIXME: there is a loading delay when switch from details to activities tab -->
-          <app-activities-list [project]="project">
-          </app-activities-list>
+          <!--
+            FIXME: there is a loading delay when switch from details to activities tab
+          -->
+          <app-activities-list [project]="project"> </app-activities-list>
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>
