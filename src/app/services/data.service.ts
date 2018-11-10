@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project } from '../models/project';
-import { Observable, of } from 'rxjs';
-import { Resource } from '../models/resource';
-import { Activity } from '../models/activity';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Project } from "../models/project";
+import { Observable, of } from "rxjs";
+import { Resource } from "../models/resource";
+import { Activity } from "../models/activity";
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -11,9 +11,10 @@ import { tap } from 'rxjs/operators';
 })
 export class DataService {
   private projects: Project[];
+  private resources: Resource[];
   private projectsUrl = 'http://localhost:4000/api/projects';
 
-  private resourcesUrl = '/api/resources';
+  private resourcesUrl = 'http://localhost:4000/api/resources';
 
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -30,7 +31,12 @@ export class DataService {
   }
 
   getResources(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(this.resourcesUrl);
+    if (this.resources) {
+      return of(this.resources);
+    }
+    return this.http
+      .get<Resource[]>(this.resourcesUrl)
+      .pipe(tap(data => (this.resources = data)));
   }
 
   saveProject(project: Project) {
@@ -42,10 +48,9 @@ export class DataService {
   }
 
   saveResource(resource: Resource) {
-    if (resource.id) {
+    if (resource._id) {
       return this.updateResource(resource);
     } else {
-      resource.activityId = null;
       return this.createResource(resource);
     }
   }
@@ -58,7 +63,7 @@ export class DataService {
   }
   updateResource(resource: Resource) {
     console.log('updating project: ', resource);
-    return this.http.put(this.resourcesUrl + '/' + resource.id, resource, {
+    return this.http.put(this.resourcesUrl + '/' + resource._id, resource, {
       headers: this.headers
     });
   }
@@ -79,7 +84,7 @@ export class DataService {
   }
   saveActivity(projectId: string, activity: Activity) {
     if (activity._id) {
-      return this.updateActivity(projectId, activity); // TODO: to be added
+      return this.updateActivity(projectId, activity);
     } else {
       return this.addActivity(projectId, activity);
     }
@@ -126,7 +131,7 @@ export class DataService {
       .get(this.projectsUrl + '/' + id)
       .pipe(tap(data => console.log('getprojectbyid from service: ', data)));
   }
-  getResourceById(id: number): Observable<Resource> {
+  getResourceById(id: string): Observable<Resource> {
     return this.http.get(this.resourcesUrl + '/' + id);
   }
 
@@ -143,6 +148,23 @@ export class DataService {
           );
           if (foundIndex > -1) {
             this.projects.splice(foundIndex, 1);
+          }
+        })
+      );
+  }
+  deleteResource(id: string): Observable<Resource> {
+    return this.http
+      .delete(this.resourcesUrl + '/' + id, {
+        headers: this.headers
+      })
+      .pipe(
+        tap(data => console.log('deleteResource: ', data)),
+        tap(data => {
+          const foundIndex = this.resources.findIndex(
+            resource => resource._id === id
+          );
+          if (foundIndex > -1) {
+            this.resources.splice(foundIndex, 1);
           }
         })
       );

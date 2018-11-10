@@ -1,5 +1,5 @@
 export interface Resource {
-  id?: number;
+  _id?: string;
   firstName?: string;
   lastName?: string;
   email?: string;

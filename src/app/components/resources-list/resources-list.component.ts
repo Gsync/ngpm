@@ -59,7 +59,7 @@ export class ResourcesListComponent implements OnInit {
       }
     });
   }
-  getResourceById(id: number) {
+  getResourceById(id: string) {
     return this.dataService.getResourceById(id);
   }
   applyFilter(filterValue: string) {
@@ -73,5 +73,21 @@ export class ResourcesListComponent implements OnInit {
       this.datasource.sort = this.sort;
       this.store.dispatch({ type: 'LOAD_RESOURCES', payload: data });
     });
+  }
+
+  deleteResource(resource: Resource) {
+    // FIXME: Does not update the table like it does in activity list, also check update resource
+    if (
+      confirm(
+        `Really delete the resource: ${resource.firstName} ${
+          resource.lastName
+        }?`
+      )
+    ) {
+      this.dataService.deleteResource(resource._id).subscribe(() => {
+        console.log(`${resource.firstName} ${resource.lastName} was deleted`);
+        this.router.navigateByUrl('/resources');
+      });
+    }
   }
 }
