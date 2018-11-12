@@ -29,6 +29,8 @@ import { InMemoryWebApiService } from './services/in-memory-web-api.service';
 import { DataService } from './services/data.service';
 import { environment } from 'src/environments/environment.prod';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IssueManagementModule } from './issues/issue-management.module';
+import { ExpenseManagementModule } from './expenses/expense-management.module';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       name: 'ngpm app devtools',
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    IssueManagementModule,
+    ExpenseManagementModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
