@@ -1,3 +1,49 @@
-<p>
-  issue-form works!
-</p>
+<h2 mat-dialog-title>{{ formTitle }}</h2>
+<mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Title" [(ngModel)]="issue.title" required />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Priority"
+        [(ngModel)]="issue.priority"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Status"
+        [(ngModel)]="issue.status"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="string"
+        placeholder="Person Created"
+        [(ngModel)]="issue.personCreated"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        placeholder="Description"
+        [(ngModel)]="issue.description"
+      ></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSave()">
+    <mat-icon>save</mat-icon> Save
+  </button>
+  <button mat-button color="primary" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon> Cancel
+  </button>
+</mat-dialog-actions>

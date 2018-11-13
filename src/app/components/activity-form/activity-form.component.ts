@@ -50,6 +50,7 @@ export class ActivityFormComponent implements OnInit {
       .subscribe();
 
     // TODO: Refresh page to show updated activities works on edit but not on add activity
+    // NOTE: thats because for activity you need project id, activity is nested in project object
   }
 
   onCancel() {

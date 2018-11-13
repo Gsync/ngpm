@@ -1,3 +1,81 @@
-<p>
-  issue-list works!
-</p>
+<mat-toolbar>
+  <span>Issues</span> <span class="toolbar-spacer"></span>
+  <button (click)="createNewDialog()" mat-raised-button color="primary">
+    <mat-icon>add</mat-icon> <span fxHide.xs>Create New</span>
+  </button>
+</mat-toolbar>
+<div class="table-container">
+  <mat-card>
+    <mat-spinner class="margin-auto" *ngIf="!datasource"></mat-spinner>
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+    <table mat-table [dataSource]="datasource" class="mat-elevation-z8" matSort>
+      <!--
+        - Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition"
+      -->
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <!--
+          NOTE: Sorting is not working because of the concatination of fname and lname below
+        -->
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <!-- DateCreated Column -->
+      <ng-container matColumnDef="dateCreated">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dateCreated | date: "d LLL" }}
+        </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <!-- Priority Column -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+        <td mat-cell *matCellDef="let element">{{ element.priority }}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="align-col-right">
+          Actions
+        </th>
+        <td mat-cell *matCellDef="let element" class="align-col-right">
+          <button
+            (click)="createNewDialog(element)"
+            mat-icon-button
+            color="primary"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="deleteIssue(element)" mat-icon-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSize]="3"
+      [pageSizeOptions]="[3, 5, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card>
+</div>
