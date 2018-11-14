@@ -12,7 +12,6 @@ import { ActivityFormComponent } from '../activity-form/activity-form.component'
   styleUrls: ['./activities-list.component.scss']
 })
 export class ActivitiesListComponent implements OnInit {
-  // FIXME Performance issue while switching from details to activites
   @Input()
   project: Project;
   dataSource: MatTableDataSource<Activity>;

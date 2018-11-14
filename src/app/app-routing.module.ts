@@ -5,6 +5,7 @@ import { ResourcesListComponent } from './components/resources-list/resources-li
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
 import { ResourceFormComponent } from './components/resource-form/resource-form.component';
+import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 
 const routes: Routes = [
   { path: 'projects', component: ProjectsListComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'projects/0/edit', component: ProjectFormComponent },
   { path: 'resources/0/edit', component: ResourceFormComponent },
   { path: 'projects/:id/edit', component: ProjectFormComponent },
+  { path: 'projects/:id/activity/:aid', component: ActivityDetailsComponent },
   { path: 'resources/:id/edit', component: ResourceFormComponent },
   { path: '', redirectTo: '/projects', pathMatch: 'full' }
 ];

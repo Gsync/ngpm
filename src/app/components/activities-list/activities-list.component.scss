@@ -1,12 +1,17 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 
 .align-col-right {
-    text-align: center;
+  text-align: center;
 }
 
 .mat-form-field {
-    font-size: 14px;
-    width: 100%;
- }
+  font-size: 14px;
+  width: 100%;
+}
+
+tr.table-element-row:hover {
+  background: #efefef;
+  cursor: pointer;
+}
