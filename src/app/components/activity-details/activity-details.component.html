@@ -24,7 +24,8 @@
           >Created by: {{ activity.personCreated }}</mat-list-item
         >
         <mat-list-item role="listitem"
-          >Hours Worked: {{ activity.hoursWorked }}</mat-list-item
+          >Hours Worked:
+          {{ activity.hoursWorked | convertSeconds }}</mat-list-item
         >
         <mat-list-item role="listitem"
           >Completed (%): {{ activity.percentComplete }}%</mat-list-item

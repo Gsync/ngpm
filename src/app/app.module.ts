@@ -30,6 +30,7 @@ import { environment } from 'src/environments/environment.prod';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IssueManagementModule } from './issues/issue-management.module';
 import { ExpenseManagementModule } from './expenses/expense-management.module';
+import { ConvertSecondsPipe } from './shared/pipes/convert-seconds.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ExpenseManagementModule } from './expenses/expense-management.module';
     ActivityDetailsComponent,
     ActivityFormComponent,
     ProjectFormComponent,
-    ResourceFormComponent
+    ResourceFormComponent,
+    ConvertSecondsPipe
   ],
   entryComponents: [ActivityFormComponent],
   imports: [

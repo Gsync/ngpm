@@ -1,15 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Activity } from '../../models/activity';
 import { DataService } from '../../services/data.service';
 import { Subscription, Observable, timer } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-activity-details',
   templateUrl: './activity-details.component.html',
   styleUrls: ['./activity-details.component.scss']
 })
-export class ActivityDetailsComponent implements OnInit, OnDestroy {
+export class ActivityDetailsComponent
+  implements OnInit, OnDestroy, AfterViewInit {
   activity: Activity;
   activityInProgress = false;
   timeTakenInSeconds = 0;
@@ -28,9 +30,14 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
       console.log('currentActivity: ', this.activity);
     });
   }
+  ngAfterViewInit() {
+    if (!this.activity._id) {
+      // TODO: get activity by id
+      console.log('No activity available');
+    }
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
-    this.activityUpdateSub.unsubscribe();
     if (this.activityInProgress) {
       this.activityTimerSub.unsubscribe();
     }
@@ -60,6 +67,7 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
   updateActivity(projectId: string, activity: Activity): void {
     this.activityUpdateSub = this.dataService
       .updateActivity(projectId, activity)
+      .pipe(take(1))
       .subscribe();
   }
   displayTimeElapsed() {

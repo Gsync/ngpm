@@ -50,7 +50,7 @@
       (click)="onSelected(element)"
       [routerLink]="['/projects', project._id, 'activity', element._id]"
     >
-      {{ element.hoursWorked }}
+      {{ element.hoursWorked | convertSeconds }}
     </td>
   </ng-container>
 
