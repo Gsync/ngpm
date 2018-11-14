@@ -1,3 +1,56 @@
-<p>
-  activity-details works!
-</p>
+<div *ngIf="activity" fxFlex>
+  <div *ngIf="activityInProgress" class="activity-progress">
+    <h2>Activity in Progress...</h2>
+    <h3>Time Elapsed: {{ displayTimeElapsed() }}</h3>
+  </div>
+  <mat-toolbar>
+    <span>{{ activity.title }}</span> <span class="toolbar-spacer"></span>
+    <button (click)="createNewDialog()" mat-raised-button color="primary">
+      <mat-icon>edit</mat-icon> <span fxHide.xs>Edit</span>
+    </button>
+    <button (click)="deleteProject()" mat-raised-button color="warn">
+      <mat-icon>delete</mat-icon> <span fxHide.xs>Delete</span>
+    </button>
+  </mat-toolbar>
+  <mat-card>
+    <mat-card-header class="details-header">
+      <mat-card-title>
+        Created on: {{ activity.dateCreated | date: "d LLLL" }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem"
+          >Created by: {{ activity.personCreated }}</mat-list-item
+        >
+        <mat-list-item role="listitem"
+          >Hours Worked: {{ activity.hoursWorked }}</mat-list-item
+        >
+        <mat-list-item role="listitem"
+          >Completed (%): {{ activity.percentComplete }}%</mat-list-item
+        >
+        <mat-list-item role="listitem"
+          >Description: {{ activity.description }}</mat-list-item
+        >
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        *ngIf="!activityInProgress"
+        (click)="startActivity()"
+        mat-raised-button
+        color="primary"
+      >
+        <mat-icon>play_arrow</mat-icon> <span fxHide.xs>Start Activity</span>
+      </button>
+      <button
+        *ngIf="activityInProgress"
+        (click)="stopActivity()"
+        mat-raised-button
+        color="warn"
+      >
+        <mat-icon>stop</mat-icon> <span fxHide.xs>Stop Activity</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

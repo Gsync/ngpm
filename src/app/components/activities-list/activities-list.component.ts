@@ -65,4 +65,7 @@ export class ActivitiesListComponent implements OnInit {
     dataSource.data.splice(itemIndex, 1);
     dataSource.paginator = paginator;
   }
+  onSelected(activity: Activity): void {
+    this.dataService.updateSelectedActivity(activity);
+  }
 }

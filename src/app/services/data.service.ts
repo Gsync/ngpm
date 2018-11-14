@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Project } from "../models/project";
-import { Observable, of } from "rxjs";
-import { Resource } from "../models/resource";
-import { Activity } from "../models/activity";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Project } from '../models/project';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Resource } from '../models/resource';
+import { Activity } from '../models/activity';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -12,6 +12,19 @@ import { tap } from 'rxjs/operators';
 export class DataService {
   private projects: Project[];
   private resources: Resource[];
+  private initialActivity: Activity = {
+    _id: null,
+    title: null,
+    dateCreated: null,
+    hoursWorked: null,
+    description: null,
+    percentComplete: null,
+    personCreated: null
+  };
+  private currentActivitySource = new BehaviorSubject<Activity>(
+    this.initialActivity
+  );
+  currentActivityChanges$ = this.currentActivitySource.asObservable(); // this exposes the readonly observable from our subject
   private projectsUrl = 'http://localhost:4000/api/projects';
 
   private resourcesUrl = 'http://localhost:4000/api/resources';
@@ -168,5 +181,9 @@ export class DataService {
           }
         })
       );
+  }
+  // this keeps the current activity in the subject store
+  updateSelectedActivity(currentActivity: Activity): void {
+    this.currentActivitySource.next(currentActivity);
   }
 }
