@@ -115,6 +115,7 @@ export class DataService {
   }
 
   updateActivity(projectId: string, activity: Activity) {
+    console.log('activity updated: ', activity);
     return this.http.put(
       `${this.projectsUrl}/${projectId}/activity/${activity._id}`,
       activity,

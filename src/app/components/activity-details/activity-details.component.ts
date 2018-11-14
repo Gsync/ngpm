@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Activity } from '../../models/activity';
 import { DataService } from '../../services/data.service';
 import { Subscription, Observable, timer } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-activity-details',
@@ -13,9 +14,13 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
   activityInProgress = false;
   timeTakenInSeconds = 0;
   activityTimerSub: Subscription;
+  activityUpdateSub: Subscription;
   timer$ = timer(0, 1000);
   sub: Subscription;
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.sub = this.dataService.currentActivityChanges$.subscribe(data => {
@@ -25,22 +30,37 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.activityUpdateSub.unsubscribe();
     if (this.activityInProgress) {
       this.activityTimerSub.unsubscribe();
     }
   }
   startActivity() {
     if (!this.activityInProgress) {
-      this.activityTimerSub = this.timer$.subscribe(
-        () => this.timeTakenInSeconds++
-      );
+      this.activityTimerSub = this.timer$.subscribe(() => {
+        this.timeTakenInSeconds++;
+      });
     }
     this.activityInProgress = true;
   }
-  stopActivity() {
+  async stopActivity() {
+    await this.updateTimeSpent();
+    this.updateActivity(this.route.snapshot.params.id, this.activity);
+    this.activityReset();
+  }
+  updateTimeSpent() {
+    this.activity.hoursWorked =
+      this.activity.hoursWorked + this.timeTakenInSeconds;
+  }
+  activityReset() {
     this.activityTimerSub.unsubscribe();
     this.timeTakenInSeconds = 0;
     this.activityInProgress = false;
+  }
+  updateActivity(projectId: string, activity: Activity): void {
+    this.activityUpdateSub = this.dataService
+      .updateActivity(projectId, activity)
+      .subscribe();
   }
   displayTimeElapsed() {
     return (
