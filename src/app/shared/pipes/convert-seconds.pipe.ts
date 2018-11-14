@@ -4,13 +4,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'convertSeconds'
 })
 export class ConvertSecondsPipe implements PipeTransform {
+  // NOTE: this should work until 24 hours
   transform(value: number): any {
-    return (
-      Math.floor(value / 3600) +
-      ':' +
-      Math.floor(value / 60) +
-      ':' +
-      Math.floor(value % 60)
-    );
+    const dateTime = new Date(null);
+    dateTime.setSeconds(value);
+    return dateTime.toISOString().substr(11, 8);
   }
 }
