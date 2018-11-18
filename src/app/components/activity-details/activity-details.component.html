@@ -4,13 +4,7 @@
     <h3>Time Elapsed: {{ displayTimeElapsed() }}</h3>
   </div>
   <mat-toolbar>
-    <span>{{ activity.title }}</span> <span class="toolbar-spacer"></span>
-    <button (click)="createNewDialog()" mat-raised-button color="primary">
-      <mat-icon>edit</mat-icon> <span fxHide.xs>Edit</span>
-    </button>
-    <button (click)="deleteProject()" mat-raised-button color="warn">
-      <mat-icon>delete</mat-icon> <span fxHide.xs>Delete</span>
-    </button>
+    <span>{{ activity.title }}</span>
   </mat-toolbar>
   <mat-card>
     <mat-card-header class="details-header">

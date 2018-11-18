@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { FirebaseDataService } from 'src/app/services/firebase-data.service';
 import { Project } from 'src/app/models/project';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ export class ProjectsListComponent implements OnInit {
   loaded: boolean;
   project: Project;
   constructor(
-    private dataService: DataService,
+    private dataService: FirebaseDataService,
     private store: Store<any>,
     private dialog: MatDialog
   ) {}

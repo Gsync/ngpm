@@ -24,7 +24,10 @@
       <mat-card-header>
         <mat-card-title class="card-title">{{ project.title }}</mat-card-title>
         <mat-card-subtitle
-          >Created: {{ project.dateCreated }}</mat-card-subtitle
+          >Created:
+          {{
+            project.dateCreated.toDate() | date: "dd/MM/yyyy"
+          }}</mat-card-subtitle
         >
         <mat-card-subtitle
           >Created by: {{ project.personCreated }}</mat-card-subtitle
