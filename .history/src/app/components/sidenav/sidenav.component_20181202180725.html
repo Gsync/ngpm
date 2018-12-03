@@ -8,7 +8,7 @@
     <mat-toolbar>
       <mat-icon class="mr-10">home</mat-icon><span>Dashboard</span>
     </mat-toolbar>
-    <mat-nav-list (click)="mobileQuery.matches ? sidenav.close() : ''">
+    <mat-nav-list (click)="mobileQuery.matches ? sidenav.close()">
       <a
         mat-list-item
         [routerLink]="['/projects']"
