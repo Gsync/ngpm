@@ -15,7 +15,7 @@ export class ActivitiesListComponent implements OnInit {
   @Input()
   project: Project;
   dataSource: MatTableDataSource<Activity>;
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, { static: true })
   paginator: MatPaginator;
   displayedColumns: string[] = [
     'title',

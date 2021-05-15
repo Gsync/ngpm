@@ -19,7 +19,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   showSidenav: boolean;
-  @ViewChild('sidenav')
+  @ViewChild('sidenav', { static: true })
   sidenav: MatSidenav;
   constructor(
     private store: Store<State>,

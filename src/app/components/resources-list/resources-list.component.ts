@@ -37,9 +37,9 @@ export class ResourcesListComponent implements OnInit {
   ) {}
 
   datasource: MatTableDataSource<Resource>;
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, { static: true })
   paginator: MatPaginator;
-  @ViewChild(MatSort)
+  @ViewChild(MatSort, { static: true })
   sort: MatSort;
 
   ngOnInit() {

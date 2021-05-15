@@ -28,9 +28,9 @@ export class IssueListComponent implements OnInit, OnDestroy {
     'actions'
   ];
   datasource: MatTableDataSource<Issue>;
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, { static: true })
   paginator: MatPaginator;
-  @ViewChild(MatSort)
+  @ViewChild(MatSort, { static: true })
   sort: MatSort;
   constructor(private issueService: IssueService, private dialog: MatDialog) {}
 
