@@ -1,4 +1,4 @@
-@import "~@angular/material/theming";
+@use '~@angular/material' as mat;
 .card-container {
     width: 100%;
     max-width: 1200px;
@@ -8,7 +8,7 @@
         margin: 10px;
         cursor: pointer;
         &:hover {
-            @include mat-elevation(10);
+            @include mat.elevation(10);
         }
         .card-title {
             font-size: 1.2em;
