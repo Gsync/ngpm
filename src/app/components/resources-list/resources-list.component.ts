@@ -4,12 +4,10 @@ import { Resource } from 'src/app/models/resource';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import {
-  MatPaginator,
-  MatTableDataSource,
-  MatSort,
-  MatDialog
-} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ResourceFormComponent } from '../resource-form/resource-form.component';
 

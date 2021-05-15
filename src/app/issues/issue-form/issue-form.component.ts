@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, Optional } from '@angular/core';
-import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Issue } from 'src/app/models/issue';
 import { IssueService } from '../issue.service';
 import { tap } from 'rxjs/operators';

@@ -2,12 +2,10 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { IssueService } from '../issue.service';
 import { Issue } from '../../models/issue';
 import { Observable } from 'rxjs';
-import {
-  MatPaginator,
-  MatTableDataSource,
-  MatSort,
-  MatDialog
-} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { IssueFormComponent } from '../issue-form/issue-form.component';
 import { Resource } from 'src/app/models/resource';
 

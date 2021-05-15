@@ -6,7 +6,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store/reducer';
 

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { flatMap } from 'rxjs/operators';
 import { ActivityFormComponent } from '../activity-form/activity-form.component';
